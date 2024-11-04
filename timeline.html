@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Night Book</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f7fa;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Book container */
+        .book {
+            position: relative;
+            width: 1000px;
+            height: 800px;
+            perspective: 1500px;
+        }
+
+        /* Pages */
+        .book-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffe6e6;
+            border: 2px solid #fa8072;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 1s ease;
+            font-size: 1.8em;
+        }
+
+        .book-page h3 {
+            font-size: 2.5em;
+            color: #ff5e78;
+        }
+
+        /* Initial state for all pages */
+        .book-page:nth-child(1) {
+            z-index: 6;
+        }
+
+        .book-page:nth-child(2) {
+            z-index: 5;
+        }
+
+        .book-page:nth-child(3) {
+            z-index: 4;
+        }
+
+        .book-page:nth-child(4) {
+            z-index: 3;
+        }
+
+        .book-page:nth-child(5) {
+            z-index: 2;
+        }
+
+        .book-page:nth-child(6) {
+            z-index: 1;
+        }
+
+        /* Page flipping effects */
+        .book-page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .book-page:nth-child(1).flipped {
+            z-index: 0;
+        }
+
+        .book-page:nth-child(2).flipped {
+            z-index: 0;
+        }
+
+        .book-page:nth-child(3).flipped {
+            z-index: 0;
+        }
+
+        .book-page:nth-child(4).flipped {
+            z-index: 0;
+        }
+
+        .book-page:nth-child(5).flipped {
+            z-index: 0;
+        }
+
+        .book-page:nth-child(6).flipped {
+            z-index: 0;
+        }
+
+        /* Book controls */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            bottom: -40px; /* Điều chỉnh khoảng cách so với trang */
+        }
+
+        /* Arrow buttons */
+        .controls button {
+            padding: 10px 20px;
+            font-size: 2em;
+            border: none;
+            background-color: transparent;
+            color: #ff5e78;
+            cursor: pointer;
+        }
+
+        .controls button:disabled {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="book">
+        <div class="book-page">
+            <h3>Book of love</h3>
+            <p>Anniversary adventure!</p>
+        </div>
+        <div class="book-page">
+            <h3>Plan 1</h3>
+            <p>4:30 PM - Pick up mon iu</p>
+        </div>
+        <div class="book-page">
+            <h3>Plan 2</h3>
+            <p>5:00 PM - Go to Photo Palette</p>
+        </div>
+        <div class="book-page">
+            <h3>Plan 3</h3>
+            <p>7:15 PM - Have dinner at Uyen Garden Bistro & Coffee</p>
+        </div>
+        <div class="book-page">
+            <h3>Plan 4</h3>
+            <p>9:00 PM - Coffe at Hanoi Neighbors(114 Tuệ Tĩnh)                </p>
+        </div>
+        <div class="book-page">
+            <h3>Plan 5</h3>
+            <p>11:00 AM - Take my babi back home</p> <!-- Trang mới -->
+        </div>
+
+        <!-- Controls (arrows) -->
+        <div class="controls">
+            <button id="prev">&#x2190;</button> <!-- Left Arrow -->
+            <button id="next">&#x2192;</button> <!-- Right Arrow -->
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.book-page');
+        const nextBtn = document.getElementById('next');
+        const prevBtn = document.getElementById('prev');
+        let currentPage = 0;
+
+        // Update buttons' disabled state
+        function updateButtons() {
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === pages.length - 1;
+        }
+
+        // Flip to the next page
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].classList.add('flipped');
+                currentPage++;
+                updateButtons();
+            }
+        });
+
+        // Flip to the previous page
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                pages[currentPage].classList.remove('flipped');
+                updateButtons();
+            }
+        });
+
+        // Initialize buttons
+        updateButtons();
+    </script>
+</body>
+</html>

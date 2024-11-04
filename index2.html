@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 20/10</title>
+    <style>
+        body {
+            background-image: url('pink.jpg'); /* Đường dẫn đến ảnh nền */
+            background-size: cover; /* Giúp ảnh bao phủ toàn bộ trang */
+            background-position: center; /* Đảm bảo ảnh được canh giữa */
+            background-repeat: no-repeat; /* Đảm bảo không lặp lại ảnh */
+            background-attachment: fixed; /* Giữ cho ảnh cố định khi cuộn */
+            font-family: "Dancing Script", cursive;
+            text-align: center;
+            background-color: #f0f8ff;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffffff; /* Thay đổi màu chữ sang trắng */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Thêm bóng chữ để rõ hơn */
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            color: #ffffff; /* Thay đổi màu chữ sang trắng */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Thêm bóng chữ để rõ hơn */
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 10px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, padding 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .no-button {
+            background-color: #f44336;
+            position: absolute;
+        }
+
+        .no-button:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy 1 month anniversary</h1>
+    <p>Will u go on a date with me?</p>
+    <button class="button" id="yesButton" onclick="window.location.href='timeline.html';">Yes</button>
+    <button class="button no-button" id="noButton">No</button>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        let scaleFactor = 1; // Hệ số để phóng to nút Yes, bắt đầu từ 1
+
+        noButton.addEventListener('click', function() {
+            // Khi nhấn nút No, nút No sẽ bắt đầu di chuyển liên tục
+            let moveInterval = setInterval(moveNoButton, 100);
+
+            function moveNoButton() {
+                // Tính toán vị trí ngẫu nhiên cho nút "No"
+                const randomX = Math.floor(Math.random() * window.innerWidth) - noButton.offsetWidth;
+                const randomY = Math.floor(Math.random() * window.innerHeight) - noButton.offsetHeight;
+
+                // Đảm bảo nút không di chuyển ra ngoài cửa sổ trình duyệt
+                noButton.style.left = `${Math.max(0, randomX)}px`;
+                noButton.style.top = `${Math.max(0, randomY)}px`;
+            }
+
+            // Mỗi lần nhấn nút "No", tăng kích thước của nút "Yes" lên một chút
+            scaleFactor += 0.5; // Tăng dần hệ số phóng to
+            yesButton.style.transform = `scale(${scaleFactor})`; // Áp dụng hiệu ứng scale cho nút Yes
+        });
+    </script>
+</body>
+</html>
